@@ -28,7 +28,8 @@ class logger {
     static transports() {
         return [
             this.consoleTransport(),
-            this.fileTransport(),
+            this.infoFileTransport(),
+            this.warnFileTransport(),
             this.errorFileTransport(),
         ];
     }
@@ -39,31 +40,31 @@ class logger {
             colorize: true,
         });
     }
-    static fileTransport() {
+    static infoFileTransport() {
         return new transports.File({
             name: 'info-file',
-            filename: logPath + 'info.log',
-            level: 'info'
+            filename: `${logPath}info.log`,
+            level: 'info',
         });
     }
     static warnFileTransport() {
         return new transports.File({
             name: 'warn-file',
-            filename: logPath + 'warnings.log',
+            filename: `${logPath}warnings.log`,
             level: 'warn',
         });
     }
     static errorFileTransport() {
         return new transports.File({
             name: 'error-file',
-            filename: logPath + 'errors.log',
+            filename: `${logPath}errors.log`,
             level: 'error',
         });
     }
     static exceptionFileHandler() {
         return new transports.File({
             name: 'exception-file',
-            filename: logPath + 'exceptions.log'
+            filename: `${logPath}exceptions.log`,
         });
     }
     static base() {

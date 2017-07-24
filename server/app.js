@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
  */
 app.use(Logger.base());
 
-app.use('/', function(req, res, next) {
+app.use('/', (req, res, next) => { // eslint-disable-line no-unused-vars
     res.send('done');
 });
 

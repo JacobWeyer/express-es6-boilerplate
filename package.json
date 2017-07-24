@@ -9,39 +9,40 @@
     "prestart": "npm run -s build",
     "start": "node dist/index.js",
     "dev": "nodemon bin/www.js",
-    "clean": "rimraf dist",
     "build": "npm run clean && mkdir -p dist && babel src -s -D -d dist",
-    "test": "jest --watch",
+    "test": "node_modules/.bin/jest",
     "lint": "eslint --color ./",
     "lint-fix": "eslint --color --fix ./"
+  },
+  "pre-commit": {
+    "run": ["lint-fix", "test"]
   },
   "dependencies": {
     "app-module-path": "^2.2.0",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
     "babel-polyfill": "^6.23.0",
-    "babel-preset-env": "^1.6.0",
     "babel-register": "^6.24.1",
     "body-parser": "^1.17.2",
     "dotenv": "^4.0.0",
-    "eslint-config-airbnb": "^15.0.2",
-    "eslint-plugin-jsx-a11y": "5.1.1",
-    "eslint-plugin-react": "7.1",
     "express": "^4.15.3",
     "express-winston": "^2.4.0",
     "path": "^0.12.7",
-    "rimraf": "^2.6.1",
     "webpack": "^3.3.0",
     "winston": "^2.3.1"
   },
   "devDependencies": {
     "babel-jest": "^20.0.3",
     "eslint": "3.19",
+    "eslint-config-airbnb": "^15.0.2",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jest": "^20.0.3",
+    "eslint-plugin-jsx-a11y": "5.1.1",
+    "eslint-plugin-react": "7.1",
     "eslint-watch": "^3.1.2",
     "jest": "^20.0.4",
     "nodemon": "^1.11.0",
+    "pre-commit": "^1.2.2",
     "supertest": "^3.0.0"
   }
 }
