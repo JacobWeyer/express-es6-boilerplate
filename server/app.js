@@ -3,7 +3,6 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import Logger from './logger';
 import sequelize from './sequelize';
-import User from '../models/user';
 // import routes from './server/routes.js';
 
 /**
@@ -39,10 +38,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(Logger.baseLogger());
 
 app.use('/', (req, res, next) => { // eslint-disable-line no-unused-vars
-    User.findAll().then((users) => {
-        console.log(users); // eslint-disable-line no-console
-        res.send('done');
-    });
+    res.send('done');
 });
 
 /**
