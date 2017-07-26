@@ -46,7 +46,6 @@ app.use('/', (req, res, next) => { // eslint-disable-line no-unused-vars
  */
 // app.use('/', routes);
 
-
 /**
  * Catch 404 errors
  * This is all page not found
