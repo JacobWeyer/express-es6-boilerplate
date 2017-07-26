@@ -12,11 +12,11 @@ import app from './app';
  * Ex server/logger.js will return the logger file from anywhere
  */
 addPath(`${__dirname}/../`);
+dotenv.config();
 
 /**
  * Initialize env file config
  */
-dotenv.config();
 
 /**
  * Default server is port 3000

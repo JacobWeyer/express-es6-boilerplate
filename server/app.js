@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import Logger from './logger';
+// import sequelize from './sequelize';
 // import routes from './routes';
 
 const app = express();
@@ -16,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 /**
  * Include Logger
  */
-app.use(Logger.base());
+app.use(Logger.baseLogger());
 
 app.use('/', (req, res, next) => { // eslint-disable-line no-unused-vars
     res.send('done');
@@ -39,7 +40,7 @@ app.use((req, res, next) => {
     next(err);
 });
 
-app.use(Logger.error);
+app.use(Logger.errorLogger);
 
 /**
  * Default Error Handler

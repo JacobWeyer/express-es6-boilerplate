@@ -1,4 +1,4 @@
-import { Logger, transports } from 'winston';
+import { Logger as WinstonLogger, transports } from 'winston';
 import expressWinston from 'express-winston';
 
 /**
@@ -15,15 +15,20 @@ import expressWinston from 'express-winston';
  */
 const logPath = `${__dirname}/../var/logs/`;
 
-class logger {
+class Logger {
     constructor(env = 'development') {
+        this.env = env;
+        if (process.env.NODE_ENV !== '') {
+            this.env = process.env.NODE_ENV;
+        }
         this.logPath = logPath;
         this.level = env === 'production' ? '' : 'verbose';
-
-        this.logger = new Logger({
+        this.logger = new WinstonLogger({
             level: this.level,
-            transports: this.transports(),
+            transports: this.transports,
         });
+
+        this.logger.log('info', 'hi');
     }
     static transports() {
         return [
@@ -67,16 +72,16 @@ class logger {
             filename: `${logPath}exceptions.log`,
         });
     }
-    static base() {
+    static baseLogger() {
         return expressWinston.logger({
             transports: this.transports(),
         });
     }
-    static error() {
+    static errorLogger() {
         return expressWinston.errorLogger({
             transports: this.transports(),
         });
     }
 }
 
-export default logger;
+export default Logger;
