@@ -1,8 +1,27 @@
-import express from 'express';
+import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
+import express from 'express';
 import Logger from './logger';
-// import sequelize from './sequelize';
-// import routes from './routes';
+import sequelize from './sequelize';
+import User from '../models/user';
+// import routes from './server/routes.js';
+
+/**
+ * Initialize env file config
+ */
+dotenv.config();
+
+/**
+ * Test connection to database
+ */
+sequelize
+    .authenticate()
+    .then(() => {
+        console.log('Successfully connected to the database'); // eslint-disable-line no-console
+    })
+    .catch((err) => {
+        console.error('Error connecting to the database: ', err); // eslint-disable-line no-console
+    });
 
 const app = express();
 /**
@@ -20,7 +39,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(Logger.baseLogger());
 
 app.use('/', (req, res, next) => { // eslint-disable-line no-unused-vars
-    res.send('done');
+    User.findAll().then((users) => {
+        console.log(users); // eslint-disable-line no-console
+        res.send('done');
+    });
 });
 
 /**

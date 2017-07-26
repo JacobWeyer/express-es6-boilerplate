@@ -1,22 +1,8 @@
-import dotenv from 'dotenv';
-import { addPath } from 'app-module-path';
-
 /**
  * Fetch the entire app
  * And start it on the server
  */
 import app from './app';
-
-/**
- * Make all files available from the absolute namespace rather than having to do long relative paths
- * Ex server/logger.js will return the logger file from anywhere
- */
-addPath(`${__dirname}/../`);
-dotenv.config();
-
-/**
- * Initialize env file config
- */
 
 /**
  * Default server is port 3000
